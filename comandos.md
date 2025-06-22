@@ -9,3 +9,9 @@ Servidores e IP's de nuestro proyecto
 * server3    Base de satos (maestro)      192.168.0.103
 * server4    Base de datos (esclavo)      192.168.0.104
 
+**Pasos:**
+
+**1. Establacer IP's estáticas:**
+```bash
+sudo nano /etc/netplan/00-installer-config.yaml
+```
