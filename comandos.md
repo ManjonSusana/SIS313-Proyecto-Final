@@ -15,3 +15,22 @@ Servidores e IP's de nuestro proyecto
 ```bash
 sudo nano /etc/netplan/00-installer-config.yaml
 ```
+Realizar para cada uno de los server de acuerdo a la IP asignada
+```bash
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      addresses: [192.168.0.100/24]
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
+      routes:
+        - to: default
+          via: 192.168.0.1
+
+```
+Se usar para actualizar la IP asignada
+```bash
+sudo netplan apply
+```
