@@ -81,9 +81,80 @@ npm init -y
 npm install express
 ```
 
+Ingresamos a app.js 
 
+```bash
+nano app.js
+```
+Copiamos esto
+```bash
 
+```
+Verificamos que este en el puerto 
+```bash
+node app.js
+```
 
+**5. Server3 y 4 Base de Datos Mestro y esclavo:**
+
+```bash
+sudo apt update
+```
+```bash
+sudo apt install mariadb-server -y
+```
+Verificamos que este funcionando 
+```bash
+sudo systemctl status mariadb
+```
+Si esta inactivo
+```bash
+sudo systemctl start mariadb
+```
+
+Ingresar a:
+```bash
+sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+```
+Escribir lo siguiente:
+```bash
+
+```
+Restaurar
+```bash
+sudo systemctl restart mariadb
+```
+Ingresar a la base de datos como Maestro (server3)
+```bash
+
+```
+
+Ingresar a la base de datos como esclavo (server4)
+* El esclavo replica todo lo del maestro
+```bash
+sudo mysql -u root -p
+```
+copiar lo siguiente 
+```bash
+CHANGE MASTER TO
+  MASTER_HOST='192.168.0.103',
+  MASTER_USER='replicador',
+  MASTER_PASSWORD='1010',
+  MASTER_LOG_FILE='mysql-bin.000001',
+  MASTER_LOG_POS=79;
+```
+Nos aseguramos que este configurado bien:
+
+```bash
+SHOW SLAVE STATUS\G
+```
+Debe esta en YES lo siguiente:
+  * Slave_IO_Running
+  * Slave_SQL_Running
+Tambien nos aseguramos de lo siguiente:
+  * Master_Host: 192.168.0.103 --> debe ser el server3
+  * Master_user: replicador
+  * Exec_Master_Log_Pos: 798
 
 
 
