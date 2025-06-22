@@ -10,7 +10,21 @@ Servidores e IP's de nuestro proyecto
 * server4    Base de datos (esclavo)      192.168.0.104
 
 **Pasos:**
-
+* Se debe tener actualizar e instalado nginx
+```bash
+sudo apt update
+```
+```bash
+sudo apt install nginx -y
+```
+Verificamos si esta fucionando
+```bash
+sudo systemctl status nginx
+```
+Si no esta activado usar esto
+```bash
+sudo systemctl start nginx
+```
 **1. Establacer IP's estáticas:**
 ```bash
 sudo nano /etc/netplan/00-installer-config.yaml
