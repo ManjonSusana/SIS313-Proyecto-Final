@@ -141,7 +141,7 @@ CHANGE MASTER TO
   MASTER_USER='replicador',
   MASTER_PASSWORD='1010',
   MASTER_LOG_FILE='mysql-bin.000001',
-  MASTER_LOG_POS=79;
+  MASTER_LOG_POS=798;
 ```
 Nos aseguramos que este configurado bien:
 
