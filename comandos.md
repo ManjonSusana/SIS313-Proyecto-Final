@@ -88,7 +88,53 @@ nano app.js
 ```
 Copiamos esto
 ```bash
+const express = require('express');
+const bodyParser = require('body-parser');
+const db = require('./db');
+const app = express();
+const port = 3000;
 
+app.use(bodyParser.json());
+
+// GET todos los usuarios
+app.get('/usuarios', (req, res) => {
+  db.query('SELECT * FROM usuarios', (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// POST nuevo usuario
+app.post('/usuarios', (req, res) => {
+  const { nombre } = req.body;
+  db.query('INSERT INTO usuarios (nombre) VALUES (?)', [nombre], (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.json({ id: result.insertId, nombre });
+  });
+});
+
+// PUT actualizar usuario
+app.put('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  const { nombre } = req.body;
+  db.query('UPDATE usuarios SET nombre = ? WHERE id = ?', [nombre, id], (err) => {
+    if (err) return res.status(500).send(err);
+    res.send(Usuario ${id} actualizado);
+  });
+});
+
+// DELETE eliminar usuario
+app.delete('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  db.query('DELETE FROM usuarios WHERE id = ?', [id], (err) => {
+    if (err) return res.status(500).send(err);
+    res.send(Usuario ${id} eliminado);
+  });
+});
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(App escuchando en http://localhost:${port});
+});
 ```
 Verificamos que este en el puerto 
 ```bash
